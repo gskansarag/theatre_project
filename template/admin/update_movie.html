@@ -1,0 +1,113 @@
+﻿{% extends 'admin/index.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   
+</head>
+<body>
+    {% block content %}
+       <div class="content-wrapper">
+            <div class="container">
+                <div class="row pad-botm">
+                    <div class="col-md-15">
+                        <h4 class="header-line">FORM EXAMPLES</h4>
+                        <div class="col-md-15">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4> Update Movie Form</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="wapper-content">
+                                        <form action="up_movie/{{movie_id.movie_id }}" method="POST" enctype="multipart/form-data" >
+                                            <div class="row">
+                                               {% csrf_token %}                                              
+                                                <div class="container"> 
+                                                    <div class="form-data col-sm-5">
+                                                        Movie Name
+                                                        <input name="Movie_Name" class="form-control" type="text" value="{{ movie_id.name }}"></input>        
+                                                    </div>
+                                                    <div class="form-data col-sm-5">
+                                                        Cast
+                                                        <input name="Movie_Cast"  class="form-control" type="text" value="{{movie_id.cast}}"></input>    
+                                                    </div>
+                                                    <div class="form-data col-sm-2">
+                                                            Current movie
+                                                            <input name="current_movie" class="form-control" type="text" value="{{movie_id.screen_id}}"disabled/>
+                                                        </div>
+                                                    <div class="form-data col-sm-5">
+                                                        Director
+                                                        <input name="Movie_Director" class="form-control" type="text" value="{{movie_id.director}}"></input>
+                                                    </div>
+                                                    <div class="form-data col-sm-5">
+                                                        Length
+                                                        <input name="Movie_Length" class="form-control" type="text" value="{{movie_id.run_length}}"></input> 
+                                                    </div>
+                                                    <div class="form-data col-sm-2">
+                                                        Current Time
+                                                        <input name="current_time" class="form-control" type="text" value="{{movie_id.time}}"disabled/>
+                                                    </div>
+                                                    <div class="form-data col-sm-5">
+                                                        Language
+                                                        <input name="Movie_Language" class="form-control" type="text" value="{{movie_id.language}}"></input>     
+                                                    </div>
+                                                    <div class="form-data col-sm-5">
+                                                        Movie Description
+                                                        <input name="Movie_Descrption" class="form-control" type="text" value="{{movie_id.movie_desc}}"></input>                          
+                                                    </div>
+                                                    <div class="form-data col-sm-2">
+                                                        Current Image
+                                                        <br>
+                                                        <img name="current_image" src='{{movie_id.image.url}}' height="50" width="100" aria-disabled="true">
+                                                    </div>
+                                                    <div class="form-data col-sm-5">
+                                                        Trailer
+                                                        <input name="Movie_Trailer" class="form-control" type="text" value="{{movie_id.trailer}}"></input>
+                                                    </div>
+                                                    <div class="form-data col-sm-5">
+                                                        Time
+                                                        <select name="Movie_Time" class="form-control">
+                                                                <option selected>select time</option>
+                                                                <option>12:00 to 3:00</option>
+                                                                <option>3:00 to 6:00</option>
+                                                                <option>6:00 to 9:00</option>
+                                                                <option>9:00 to 12:00</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-data col-sm-5">
+                                                        Screen
+                                                        <select name="Movie_Screen_Id" class="form-control">  
+                                                                <option selected>select screen</option>
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-data col-sm-5">
+                                                            Picture
+                                                            <input name="Movie_Image" type="file"  onchange="ValidateSize(this)"  accept="image/x-png,image/gif,image/jpeg" />
+                                                    </div>
+                                                </div>
+                                                
+                                                <center>
+                                                <div>
+                                                        <button name="submit" class="btn btn-success">Update</button>&nbsp;
+                                                        </div>
+                                            </center>
+                                           
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+               
+    {% endblock %}
+</body>
+</html>
+ 
+                                
+                                        

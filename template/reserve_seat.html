@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}
+BoxOffice | Reserve Seats
+{% endblock %}
+
+{% block content %}
+
+	<h1>Select Seats</h1>
+	<h3>{{ show_info }}</h3>
+	<div class="seatDiv">
+		<div id="seatArray">
+		</div>
+		<div class="seatForm">
+			<form method="post" action="{% url 'booking:payment_gateway' %}">
+				{% csrf_token %}
+				{{ form.as_p }}
+				Seats: <input name="selected_seat" id="selected_seat" type="text" readonly />
+				<br /><br />
+				<span>Total number of seats:</span><span id="no_of_seats">0</span>
+				<input type="hidden" name="show_id" id="show_id" value="{{ show_info.id }}" readonly />
+				<br /><br />
+				<button type="submit" class="btn btn-warning">Confirm</button>
+			</form>
+		</div>
+	</div>
+	<br><br><br><br><br><br><br><br><br><br><br>
+	<script src="{% static 'js/common.js' %}"></script>
+
+</script>
+{% endblock %}

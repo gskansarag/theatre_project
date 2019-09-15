@@ -1,0 +1,43 @@
+
+{% include "index.html" %}
+
+{% block title %}
+    BoxOffice | Theatres
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+    {% for category in movie_list %}
+    
+    
+        <div class="text-center">
+            <h2>{{ category.0.language }} MOVIES</h2>
+        </div>
+        <div class="row">
+            <br><br><br><br><br><br><br><br><br><br><br><br><br>
+        {% for movie in category %}
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img height=30 width=50 src="{{ movie.image.url }}" alt="{{ movie.name }}">
+                    <div class="caption">
+                        <h3><a  href="/movies/{{ movie.movie_id }}">{{ movie.name }}</a></h3>
+                        <p>{{ movie.cast }}</p>
+                        <p>{{ movie.language }} | {{ movie.certificate }}</p>
+                        <a class="btn btn-success" href="/movies/{{ movie.movie_id }}">Book Now</a>
+                     </div>
+                </div>
+            </div>
+        {% if forloop.counter|divisibleby:3 or forloop.counter == category|length %}
+        </div>
+        {% endif %}
+        {% if forloop.counter != category|length %}
+        <div class="row">
+        
+        {% endif %}
+        {% endfor %}
+    </div>  
+      
+    {% endfor %}
+</div>
+{% endblock %}

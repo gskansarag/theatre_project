@@ -1,0 +1,262 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MOVIE TICKET ONLINE </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700"> 
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{% static "static2/style.css" %}">
+    <link rel="stylesheet" href="{% static "static2/jquery-ui.css" %}">
+    <link rel="stylesheet" href="{% static "static2/bootstrap/css/bootstrap.min.css" %}">
+    <script src="{% static "static2/jquery-3.3.1.min.js" %}"></script>
+    <script src="{% static "static2/jquery-ui.js" %}"></script>
+    <script src="{% static "static2/bootstrap/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "static2/common.js" %}"></script>
+
+
+
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mediaelementplayer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fl-bigmug-line.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+  </head>
+  <body>
+    <div class="site-wrap">
+      <div class="site-navbar mt-4">
+        <div class="container py-1">
+          <div class="row align-items-center">
+            <div class="col-8 col-md-8 col-lg-4">
+              <h1 class="mb-0"><a href="{% url 'index' %}" class="text-white h2 mb-0"><strong>MOVIE TICKET ONLINE<span class="text-primary">.</span></strong></a></h1>
+            </div>
+            <div class="col-4 col-md-4 col-lg-8">
+              <nav class="site-navigation text-right text-md-right" role="navigation">
+                <!--<div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>-->
+                <ul class="site-menu js-clone-nav d-none d-lg-block">
+                  <li class="active">
+                    <a href="{% url 'index' %}">Home</a>
+                  </li>
+                  <li><a href="{% url 'movie:list' %}">MOVIE</a></li>
+                  <li class="has-children">
+                    <a href="{% url 'index' %}">ACCOUNT</a>
+                    <ul class="dropdown arrow-top">
+                      <li><a href="{% url 'chooselogin' %}">LOGIN</a></li>
+                      <li><a href="{% url 'signup' %}">SIGNUP</a></li>
+                    </ul>
+                  </li>
+                  
+                  <li><a href="{% url 'aboutus' %}">About</a></li>
+                  <li><a href="{% url 'contactus' %}">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<br><br><br><br><br><br>
+{% block content %}
+
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+      {% for top in top_movie %}
+        {% if forloop.counter == 1 %}
+        <div class="item active">
+        {% else %}
+        <div class="item">
+        {% endif %}
+          <img class="carousel-img" src="{{ top.image.url }}" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>{{ top.name }}</h1>
+              <p>{{ top.cast }}</p>
+              <p>
+                <a class="btn btn-lg btn-primary" onclick="watchTrailer('{{ top.name }}','{{ top.trailer }}')"role="button">Watch Trailer</a>
+                
+                <a class="btn btn-lg btn-primary" href="{{ top.get_absolute_url }}" role="button">Book Now</a>
+                
+              </p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    <div class="jumbotron"   style="background-color:#001122">
+      <div class="text-center">
+        <h2>Now Showing</h2>
+      </div>
+      <div class="row">
+      {% for movie in movie_list %}
+        <div class="col-sm-4">
+          <div class="thumbnail">
+            <img src="{{ movie.image.url }}" alt="{{ movie.name }}">
+            <div class="caption">
+              <h3><a href="{{ movie.get_absolute_url }}">{{ movie.name }}</a></h3>
+              <p>{{ movie.cast }}</p>
+              <p>{{ movie.language }} | {{ movie.certificate }}</p>
+              <p><a class="btn btn-default" href="{{ movie.trailer }}" role="button">Watch Trailer</a>
+                <a class="btn btn-primary" href="{% url 'movie:detail' movie.movie_id %}" role="button">Book Now</a></p>
+            </div>
+          </div>
+        </div>
+      {% if forloop.counter|divisibleby:3 %}
+      </div>
+      {% if forloop.counter != movie_list|length %}
+      <div class="row">
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+    </div>
+    <script type="text/javascript">
+        $('.carousel').carousel({
+            interval: 2500,
+            
+        });
+    </script>
+
+{% endblock %} 
+
+        
+       
+    <div class="bg-primary" data-aos="fade" style="margin-top: 50px">
+      <div class="container">
+        <div class="row">
+          <a href="#" class="col-2 text-center py-4 social-icon d-block"><span class="icon-facebook text-white"></span></a>
+          <a href="#" class="col-2 text-center py-4 social-icon d-block"><span class="icon-twitter text-white"></span></a>
+          <a href="https://www.instagram.com" class="col-2 text-center py-4 social-icon d-block"><span class="icon-instagram text-white"></span></a>
+          <a href="#" class="col-2 text-center py-4 social-icon d-block"><span class="icon-linkedin text-white"></span></a>
+          <a href="#" class="col-2 text-center py-4 social-icon d-block"><span class="icon-pinterest text-white"></span></a>
+          <a href="#" class="col-2 text-center py-4 social-icon d-block"><span class="icon-youtube text-white"></span></a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="mb-5">
+              <h3 class="footer-heading mb-4">About Us</h3>
+              <p>our aim is to get best response from the user</p>
+            </div>
+            <div class="mb-5">
+              <h3 class="footer-heading mb-4">Subscribe</h3>
+              <form action="#" method="post" class="site-block-subscribe">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Enter your email"
+                    aria-label="Enter Email" aria-describedby="button-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary rounded-top-right-0" type="button" id="button-addon2">Subscribe</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h3 class="footer-heading mb-4">Navigations</h3>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <ul class="list-unstyled">
+                  <li><a href="{% url 'index' %}">Home</a></li>
+                  <li><a href="{% url 'movie:list' %}">MOVIE</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <ul class="list-unstyled">
+                  <li><a href="{% url 'aboutus' %}">About Us</a></li>
+                
+                  <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+               
+                </ul>
+              </div>
+            </div>
+
+            
+
+          </div>
+
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <div class="mb-5">
+              <h3 class="footer-heading mb-4">Watch Live Streaming</h3>
+
+              <div class="block-16">
+                <figure>
+                  <img src="{% static 'images/10.jpg' %}" alt="Image placeholder" class="img-fluid rounded">
+                  <a href="https://vimeo.com/channels/staffpicks/93951774" class="play-button popup-vimeo"><span class="icon-play"></span></a>
+                </figure>
+              </div>
+
+            </div>
+
+            
+
+          </div>
+          
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved <i class="icon-heart text-danger" aria-hidden="true"></i> by <b>DGNGROUP</b>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <script src="{% static 'js/common.js' %}"></script>
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/jquery-ui.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/mediaelement-and-player.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/circleaudioplayer.js' %}"></script>
+
+  <script src="{% static 'js/main.js' %}"></script>
+    
+  </body>
+</html>

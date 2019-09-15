@@ -1,0 +1,64 @@
+{% extends "index.html" %}
+
+{% block title %}
+BoxOffice | Movie Details
+{% endblock %}
+
+{% block content %}
+
+
+<div class="media">
+  <div class="media-left">
+    <a href="#">
+      <img src="{{ movie_info.image.url }}" alt="{{ movie_info.name }}">
+    </a>
+    <a href="#" style="margin:15px;" onclick="watchTrailer('{{ movie_info.name }}','{{ movie_info.trailer }}')" role="button" class="btn btn-primary btn-sm">Watch Trailer</a>
+  </div>
+  <div class="media-body form-horizontal">
+    <u><h4 class="media-heading">{{ movie_info.name }}</h4></u>
+    <div class="form-group">
+      Cast :->> {{ movie_info.cast }}
+    </div>
+    <div class="form-group">
+      Director :->> {{ movie_info.director }}
+      
+    </div>
+    <div class="form-group">
+      Language :->> {{ movie_info.language }}
+    </div>
+    <div class="form-group">
+     Runtime :->> {{ movie_info.run_length }} mins
+    </div>
+    <div class="form-group">
+     Certificate :->> {{ movie_info.certificate }}
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Now Showing</h3>
+  </div>
+  <div class="panel-body">
+        {% if show_list %}
+        {% for theatre in show_list %}
+        <div class="media">
+          
+          <div class="media-body">
+            <h4 class="media-heading"><a href="{{ theatre.get_absolute_url }}">{{ theatre.0.theatre.name }} | {{ theatre.0.theatre.address }}</a></h4>
+          <ul>
+            {% for showtime in theatre %}
+             
+                <a href="{% url 'booking:reserve_seat' showtime.id %}">{{ showtime.time|time:"h:i A" }}</a></li>
+            {% endfor %}
+            </ul> 
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="lead">No Shows</p>
+        {% endif %}
+  </div>
+</div>
+
+{% endblock %}

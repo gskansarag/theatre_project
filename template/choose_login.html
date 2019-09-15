@@ -1,0 +1,48 @@
+{% extends 'index.html' %}
+<html>
+    <head>
+        <title>Online movie ticket</title>
+    </head>
+    <body>
+
+
+            {% block content %}
+<br><br><br>
+        <div  style="align-content: center">
+            <div class="site-section">
+                    <div class="container">
+                            <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-7 text-center" data-aos="fade-up" data-aos-delay="600">
+                        
+                      
+                          <h1>Please choose login type </h1>
+                            <br><br>
+                                <div class="row form-group">
+                                  <div class="col-md-12">
+                                  <a href="{% url 'login' %}" class="btn btn-primary py-3 px-4">USER LOGIN
+                                  </a>
+                                   </div>
+                                </div><br><br>
+                                 <div class="row form-group">
+                                  <div class="col-md-12">
+                                  <a href="{% url 'adminlogin1' %}" class="btn btn-primary py-3 px-4">ADMIN LOGIN
+                                  </a>
+                                    </div>
+                                </div>
+                      
+                              </form>
+                          
+                        </div>
+                  
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+            {% endblock %}
+         
+    </body>
+
+
+
+</html>

@@ -1,0 +1,70 @@
+﻿{% extends 'admin/index.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   
+</head>
+<body>
+    {% block content %}
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row pad-botm">
+                    <div class="col-md-12">
+                        <h4 class="header-line">TABLE EXAMPLES</h4>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Movies List
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <form></form>
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr> 
+                                        <th width="15%">Movie_Name</th>
+                                        <th width="5%">Cast</th>
+                                        <th width="5%">Length</th>
+                                        <th width="10%">Language</th>
+                                        <th width="10%">Director</th>
+                                        <th width="10%">Movie_desc</th>
+                                        <th width="10%">Time</th>
+                                        <th width="5%">Screen_id</th>
+                                        <th width="5%">Image</th>
+                                        <th width="10%">Trailer</th>
+                                        <th width="20%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for insert in ins %}
+                                    <tr>
+                                        <td>{{insert.name}}</td>
+                                        <td>{{insert.cast}}</td>
+                                        <td>{{insert.run_length}}</td>
+                                        <td>{{insert.language}}</td>
+                                        <td>{{insert.director}}</td>
+                                        <td>{{insert.movie_desc}}</td>
+                                        <td>{{insert.time}}</td>
+                                        <td>{{insert.screen_id}}</td>
+                                        <td><img src='{{insert.image.url}}' height="80" width="80"></td>
+                                        <td>{{insert.trailer}}</td>
+                                        <td><!--<button name="Update" class="btn btn-success">Update</button>&nbsp;
+                                            <button name="Delete" class="btn btn-success">Delete</button>-->
+                                            <a class="btn btn-success" href="/update_movie/{{ insert.movie_id }}">Update</a>
+                                            <a class="btn btn-success" href="/delete_movie/{{ insert.movie_id }}">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>              
+    {% endblock %}
+</body>
+</html>

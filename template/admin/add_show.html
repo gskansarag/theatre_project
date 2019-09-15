@@ -1,0 +1,99 @@
+{% extends 'admin/index.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   
+</head>
+<body>
+    {% block content %}
+       <div class="content-wrapper">
+            <div class="container">
+                <div class="row pad-botm">
+                    <div class="col-md-15">
+                        <h4 class="header-line">FORM EXAMPLES</h4>
+                        <div class="col-md-15">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4> Add New Show</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="wapper-content">
+                                            {% for message in messages %}
+                                            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                                                {{ message }}
+                                            </div>
+                                            {% endfor %}
+                                        <form action="addmoviefunc" method="POST" enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class=col-md-12>
+                                                    <div class="widgets-containers"></div>
+                                               {% csrf_token %} 
+                                                <div class="container"> 
+                                                    
+                                                    <div class="form-data col-sm-5">
+                                                        Movie_Name
+                                                        <select name="item_id" class="form-control">
+                                                        {% for entry in items %}
+                                                            <option value="{{ entry.movie }}">{{ entry.name}}</option>
+                                                        {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-data col-sm-5">
+                                                        Theater
+                                                        <select name="Theater" class="form-control">
+                                                                <option selected>select time</option>
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-data col-sm-5">
+                                                        Screen
+                                                        <select name="Screen" class="form-control">
+                                                               <option selected>select screen</option>
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-data col-sm-5">
+                                                        Date
+                                                        <select name="Date" class="form-control">  
+                                                                <option selected>select Date</option>
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                        </select>
+                                                    </div>
+                                                     <div class="form-data col-sm-5">
+                                                        Time
+                                                        <select name="Time" class="form-control">
+                                                                <option selected>select time</option>
+                                                                <option>12:00 to 3:00</option>
+                                                                <option>3:00 to 6:00</option>
+                                                                <option>6:00 to 9:00</option>
+                                                                <option>9:00 to 12:00</option>
+                                                        </select>
+                                                    </div>
+                                                   
+                                                </div>
+                                                <br>
+                                                <center>
+                                                <div>
+                                                    <button type="submit" class="btn btn-success">ADD</button>
+                                                </div>
+                                            </center>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+               
+    {% endblock %}
+</body>
+</html>
